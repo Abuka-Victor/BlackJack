@@ -10,9 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.7",
+    "@tailwindcss/vite": "^4.0.8",
     "@tanstack/react-router": "^1.106.0",
+    "framer-motion": "^12.4.7",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",

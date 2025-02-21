@@ -11,10 +11,40 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as PricingImport } from './routes/pricing'
+import { Route as FeaturesImport } from './routes/features'
+import { Route as DemoImport } from './routes/demo'
+import { Route as DashboardImport } from './routes/dashboard'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as DashboardRafflesImport } from './routes/dashboard.raffles'
+import { Route as DashboardCommunitiesImport } from './routes/dashboard.communities'
 
 // Create/Update Routes
+
+const PricingRoute = PricingImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FeaturesRoute = FeaturesImport.update({
+  id: '/features',
+  path: '/features',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DemoRoute = DemoImport.update({
+  id: '/demo',
+  path: '/demo',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardRoute = DashboardImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AboutRoute = AboutImport.update({
   id: '/about',
@@ -26,6 +56,18 @@ const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardRafflesRoute = DashboardRafflesImport.update({
+  id: '/raffles',
+  path: '/raffles',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardCommunitiesRoute = DashboardCommunitiesImport.update({
+  id: '/communities',
+  path: '/communities',
+  getParentRoute: () => DashboardRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -46,44 +88,151 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardImport
+      parentRoute: typeof rootRoute
+    }
+    '/demo': {
+      id: '/demo'
+      path: '/demo'
+      fullPath: '/demo'
+      preLoaderRoute: typeof DemoImport
+      parentRoute: typeof rootRoute
+    }
+    '/features': {
+      id: '/features'
+      path: '/features'
+      fullPath: '/features'
+      preLoaderRoute: typeof FeaturesImport
+      parentRoute: typeof rootRoute
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/communities': {
+      id: '/dashboard/communities'
+      path: '/communities'
+      fullPath: '/dashboard/communities'
+      preLoaderRoute: typeof DashboardCommunitiesImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/raffles': {
+      id: '/dashboard/raffles'
+      path: '/raffles'
+      fullPath: '/dashboard/raffles'
+      preLoaderRoute: typeof DashboardRafflesImport
+      parentRoute: typeof DashboardImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface DashboardRouteChildren {
+  DashboardCommunitiesRoute: typeof DashboardCommunitiesRoute
+  DashboardRafflesRoute: typeof DashboardRafflesRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardCommunitiesRoute: DashboardCommunitiesRoute,
+  DashboardRafflesRoute: DashboardRafflesRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/demo': typeof DemoRoute
+  '/features': typeof FeaturesRoute
+  '/pricing': typeof PricingRoute
+  '/dashboard/communities': typeof DashboardCommunitiesRoute
+  '/dashboard/raffles': typeof DashboardRafflesRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/demo': typeof DemoRoute
+  '/features': typeof FeaturesRoute
+  '/pricing': typeof PricingRoute
+  '/dashboard/communities': typeof DashboardCommunitiesRoute
+  '/dashboard/raffles': typeof DashboardRafflesRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/demo': typeof DemoRoute
+  '/features': typeof FeaturesRoute
+  '/pricing': typeof PricingRoute
+  '/dashboard/communities': typeof DashboardCommunitiesRoute
+  '/dashboard/raffles': typeof DashboardRafflesRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/dashboard'
+    | '/demo'
+    | '/features'
+    | '/pricing'
+    | '/dashboard/communities'
+    | '/dashboard/raffles'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to:
+    | '/'
+    | '/about'
+    | '/dashboard'
+    | '/demo'
+    | '/features'
+    | '/pricing'
+    | '/dashboard/communities'
+    | '/dashboard/raffles'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/dashboard'
+    | '/demo'
+    | '/features'
+    | '/pricing'
+    | '/dashboard/communities'
+    | '/dashboard/raffles'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
+  DemoRoute: typeof DemoRoute
+  FeaturesRoute: typeof FeaturesRoute
+  PricingRoute: typeof PricingRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  DashboardRoute: DashboardRouteWithChildren,
+  DemoRoute: DemoRoute,
+  FeaturesRoute: FeaturesRoute,
+  PricingRoute: PricingRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +246,11 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/about",
+        "/dashboard",
+        "/demo",
+        "/features",
+        "/pricing"
       ]
     },
     "/": {
@@ -105,6 +258,30 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/dashboard": {
+      "filePath": "dashboard.tsx",
+      "children": [
+        "/dashboard/communities",
+        "/dashboard/raffles"
+      ]
+    },
+    "/demo": {
+      "filePath": "demo.tsx"
+    },
+    "/features": {
+      "filePath": "features.tsx"
+    },
+    "/pricing": {
+      "filePath": "pricing.tsx"
+    },
+    "/dashboard/communities": {
+      "filePath": "dashboard.communities.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/raffles": {
+      "filePath": "dashboard.raffles.tsx",
+      "parent": "/dashboard"
     }
   }
 }
