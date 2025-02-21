@@ -13,8 +13,11 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as PricingImport } from './routes/pricing'
 import { Route as FeaturesImport } from './routes/features'
+import { Route as DocsImport } from './routes/docs'
 import { Route as DemoImport } from './routes/demo'
 import { Route as DashboardImport } from './routes/dashboard'
+import { Route as BlogImport } from './routes/blog'
+import { Route as AnalyticsImport } from './routes/analytics'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 import { Route as DashboardRafflesImport } from './routes/dashboard.raffles'
@@ -34,6 +37,12 @@ const FeaturesRoute = FeaturesImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const DocsRoute = DocsImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const DemoRoute = DemoImport.update({
   id: '/demo',
   path: '/demo',
@@ -43,6 +52,18 @@ const DemoRoute = DemoImport.update({
 const DashboardRoute = DashboardImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BlogRoute = BlogImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AnalyticsRoute = AnalyticsImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -88,6 +109,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsImport
+      parentRoute: typeof rootRoute
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogImport
+      parentRoute: typeof rootRoute
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -100,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/demo'
       fullPath: '/demo'
       preLoaderRoute: typeof DemoImport
+      parentRoute: typeof rootRoute
+    }
+    '/docs': {
+      id: '/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof DocsImport
       parentRoute: typeof rootRoute
     }
     '/features': {
@@ -152,8 +194,11 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/analytics': typeof AnalyticsRoute
+  '/blog': typeof BlogRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/demo': typeof DemoRoute
+  '/docs': typeof DocsRoute
   '/features': typeof FeaturesRoute
   '/pricing': typeof PricingRoute
   '/dashboard/communities': typeof DashboardCommunitiesRoute
@@ -163,8 +208,11 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/analytics': typeof AnalyticsRoute
+  '/blog': typeof BlogRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/demo': typeof DemoRoute
+  '/docs': typeof DocsRoute
   '/features': typeof FeaturesRoute
   '/pricing': typeof PricingRoute
   '/dashboard/communities': typeof DashboardCommunitiesRoute
@@ -175,8 +223,11 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/analytics': typeof AnalyticsRoute
+  '/blog': typeof BlogRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/demo': typeof DemoRoute
+  '/docs': typeof DocsRoute
   '/features': typeof FeaturesRoute
   '/pricing': typeof PricingRoute
   '/dashboard/communities': typeof DashboardCommunitiesRoute
@@ -188,8 +239,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/analytics'
+    | '/blog'
     | '/dashboard'
     | '/demo'
+    | '/docs'
     | '/features'
     | '/pricing'
     | '/dashboard/communities'
@@ -198,8 +252,11 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/analytics'
+    | '/blog'
     | '/dashboard'
     | '/demo'
+    | '/docs'
     | '/features'
     | '/pricing'
     | '/dashboard/communities'
@@ -208,8 +265,11 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/analytics'
+    | '/blog'
     | '/dashboard'
     | '/demo'
+    | '/docs'
     | '/features'
     | '/pricing'
     | '/dashboard/communities'
@@ -220,8 +280,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AnalyticsRoute: typeof AnalyticsRoute
+  BlogRoute: typeof BlogRoute
   DashboardRoute: typeof DashboardRouteWithChildren
   DemoRoute: typeof DemoRoute
+  DocsRoute: typeof DocsRoute
   FeaturesRoute: typeof FeaturesRoute
   PricingRoute: typeof PricingRoute
 }
@@ -229,8 +292,11 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AnalyticsRoute: AnalyticsRoute,
+  BlogRoute: BlogRoute,
   DashboardRoute: DashboardRouteWithChildren,
   DemoRoute: DemoRoute,
+  DocsRoute: DocsRoute,
   FeaturesRoute: FeaturesRoute,
   PricingRoute: PricingRoute,
 }
@@ -247,8 +313,11 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
+        "/analytics",
+        "/blog",
         "/dashboard",
         "/demo",
+        "/docs",
         "/features",
         "/pricing"
       ]
@@ -259,6 +328,12 @@ export const routeTree = rootRoute
     "/about": {
       "filePath": "about.tsx"
     },
+    "/analytics": {
+      "filePath": "analytics.tsx"
+    },
+    "/blog": {
+      "filePath": "blog.tsx"
+    },
     "/dashboard": {
       "filePath": "dashboard.tsx",
       "children": [
@@ -268,6 +343,9 @@ export const routeTree = rootRoute
     },
     "/demo": {
       "filePath": "demo.tsx"
+    },
+    "/docs": {
+      "filePath": "docs.tsx"
     },
     "/features": {
       "filePath": "features.tsx"

@@ -3,21 +3,19 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useConnectModal } from '../context/ConnectModalContext';
 import { ConnectModal } from './ui/ConnectModal';
-import { 
-  List, 
-  X, 
-  Rocket, 
-  ChartLine, 
+import {
+  List,
+  X,
   Lightning,
   CurrencyCircleDollar,
   Article,
   Book,
-  SignIn
+  SignIn,
 } from '@phosphor-icons/react';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { openModal, closeModal } = useConnectModal();
+  const { openModal } = useConnectModal();
 
   return (
     <nav className="p-6 relative">
@@ -30,7 +28,7 @@ export default function Navbar() {
             BLACKJACK
           </Link>
           <div className="hidden md:flex space-x-6">
-            <Link to="/trading" className="text-gray-300 hover:text-white">
+            <Link to="/" className="text-gray-300 hover:text-white">
               Go Pro
             </Link>
             <Link to="/analytics" className="text-gray-300 hover:text-white">
@@ -52,19 +50,31 @@ export default function Navbar() {
         </button>
 
         <div className="hidden md:flex items-center space-x-6">
-          <Link to="/features" className="text-gray-300 hover:text-white flex items-center space-x-2">
+          <Link
+            to="/features"
+            className="text-gray-300 hover:text-white flex items-center space-x-2"
+          >
             <Lightning size={20} />
             <span>Features</span>
           </Link>
-          <Link to="/pricing" className="text-gray-300 hover:text-white flex items-center space-x-2">
+          <Link
+            to="/pricing"
+            className="text-gray-300 hover:text-white flex items-center space-x-2"
+          >
             <CurrencyCircleDollar size={20} />
             <span>Pricing</span>
           </Link>
-          <Link to="/blog" className="text-gray-300 hover:text-white flex items-center space-x-2">
+          <Link
+            to="/blog"
+            className="text-gray-300 hover:text-white flex items-center space-x-2"
+          >
             <Article size={20} />
             <span>Blog</span>
           </Link>
-          <Link to="/docs" className="text-gray-300 hover:text-white flex items-center space-x-2">
+          <Link
+            to="/docs"
+            className="text-gray-300 hover:text-white flex items-center space-x-2"
+          >
             <Book size={20} />
             <span>Docs</span>
           </Link>
@@ -90,9 +100,6 @@ export default function Navbar() {
             className="absolute top-20 left-0 right-0 bg-black bg-opacity-95 md:hidden p-4 space-y-4"
           >
             <div className="flex flex-col space-y-4">
-              <Link to="/trading" className="text-gray-300 hover:text-white">
-                Trading
-              </Link>
               <Link to="/analytics" className="text-gray-300 hover:text-white">
                 Analytics
               </Link>
@@ -122,7 +129,7 @@ export default function Navbar() {
       </AnimatePresence>
 
       {/* Add the ConnectModal component */}
-      <ConnectModal onClose={closeModal} />
+      <ConnectModal />
     </nav>
   );
 }
