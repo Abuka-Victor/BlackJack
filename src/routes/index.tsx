@@ -25,19 +25,22 @@ function Index() {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-7xl font-bold text-white mb-6 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
           >
-            The Ultimate Discord <br />
+            The Ultimate Discord{' '}
             <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
-              Raffle Management
+              Raffle
             </span>{' '}
-            Platform
+            <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+              Management
+            </span>
+            <br className="hidden sm:block" /> Platform
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-xl text-gray-400 mb-12"
+            className="text-lg sm:text-xl text-gray-400 mb-12 max-w-3xl mx-auto px-4"
           >
             Streamline your community raffles with automated winner selection,
             multi-platform verification, and powerful analytics.
