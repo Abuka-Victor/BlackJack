@@ -26,6 +26,7 @@ import { Route as LayoutAboutImport } from './routes/_layout.about'
 import { Route as DashboardDashboardIndexImport } from './routes/dashboard/_dashboard/index'
 import { Route as DashboardDashboardRafflesImport } from './routes/dashboard/_dashboard/raffles'
 import { Route as DashboardDashboardCommunitiesImport } from './routes/dashboard/_dashboard/communities'
+import { Route as DashboardDashboardBrowseImport } from './routes/dashboard/_dashboard/browse'
 import { Route as DashboardDashboardAnalyticsImport } from './routes/dashboard/_dashboard/analytics'
 import { Route as DashboardDashboardSettingsSettingsImport } from './routes/dashboard/_dashboard/settings/_settings'
 import { Route as DashboardDashboardSettingsSettingsIndexImport } from './routes/dashboard/_dashboard/settings/_settings/index'
@@ -134,6 +135,12 @@ const DashboardDashboardCommunitiesRoute =
     path: '/communities',
     getParentRoute: () => DashboardDashboardRoute,
   } as any)
+
+const DashboardDashboardBrowseRoute = DashboardDashboardBrowseImport.update({
+  id: '/browse',
+  path: '/browse',
+  getParentRoute: () => DashboardDashboardRoute,
+} as any)
 
 const DashboardDashboardAnalyticsRoute =
   DashboardDashboardAnalyticsImport.update({
@@ -276,6 +283,13 @@ declare module '@tanstack/react-router' {
       path: '/analytics'
       fullPath: '/dashboard/analytics'
       preLoaderRoute: typeof DashboardDashboardAnalyticsImport
+      parentRoute: typeof DashboardDashboardImport
+    }
+    '/dashboard/_dashboard/browse': {
+      id: '/dashboard/_dashboard/browse'
+      path: '/browse'
+      fullPath: '/dashboard/browse'
+      preLoaderRoute: typeof DashboardDashboardBrowseImport
       parentRoute: typeof DashboardDashboardImport
     }
     '/dashboard/_dashboard/communities': {
@@ -432,6 +446,7 @@ const DashboardDashboardSettingsRouteWithChildren =
 
 interface DashboardDashboardRouteChildren {
   DashboardDashboardAnalyticsRoute: typeof DashboardDashboardAnalyticsRoute
+  DashboardDashboardBrowseRoute: typeof DashboardDashboardBrowseRoute
   DashboardDashboardCommunitiesRoute: typeof DashboardDashboardCommunitiesRoute
   DashboardDashboardRafflesRoute: typeof DashboardDashboardRafflesRoute
   DashboardDashboardIndexRoute: typeof DashboardDashboardIndexRoute
@@ -440,6 +455,7 @@ interface DashboardDashboardRouteChildren {
 
 const DashboardDashboardRouteChildren: DashboardDashboardRouteChildren = {
   DashboardDashboardAnalyticsRoute: DashboardDashboardAnalyticsRoute,
+  DashboardDashboardBrowseRoute: DashboardDashboardBrowseRoute,
   DashboardDashboardCommunitiesRoute: DashboardDashboardCommunitiesRoute,
   DashboardDashboardRafflesRoute: DashboardDashboardRafflesRoute,
   DashboardDashboardIndexRoute: DashboardDashboardIndexRoute,
@@ -473,6 +489,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardDashboardRouteWithChildren
   '/': typeof LayoutIndexRoute
   '/dashboard/analytics': typeof DashboardDashboardAnalyticsRoute
+  '/dashboard/browse': typeof DashboardDashboardBrowseRoute
   '/dashboard/communities': typeof DashboardDashboardCommunitiesRoute
   '/dashboard/raffles': typeof DashboardDashboardRafflesRoute
   '/dashboard/': typeof DashboardDashboardIndexRoute
@@ -496,6 +513,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardDashboardIndexRoute
   '/': typeof LayoutIndexRoute
   '/dashboard/analytics': typeof DashboardDashboardAnalyticsRoute
+  '/dashboard/browse': typeof DashboardDashboardBrowseRoute
   '/dashboard/communities': typeof DashboardDashboardCommunitiesRoute
   '/dashboard/raffles': typeof DashboardDashboardRafflesRoute
   '/dashboard/settings': typeof DashboardDashboardSettingsSettingsIndexRoute
@@ -520,6 +538,7 @@ export interface FileRoutesById {
   '/dashboard/_dashboard': typeof DashboardDashboardRouteWithChildren
   '/_layout/': typeof LayoutIndexRoute
   '/dashboard/_dashboard/analytics': typeof DashboardDashboardAnalyticsRoute
+  '/dashboard/_dashboard/browse': typeof DashboardDashboardBrowseRoute
   '/dashboard/_dashboard/communities': typeof DashboardDashboardCommunitiesRoute
   '/dashboard/_dashboard/raffles': typeof DashboardDashboardRafflesRoute
   '/dashboard/_dashboard/': typeof DashboardDashboardIndexRoute
@@ -547,6 +566,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/'
     | '/dashboard/analytics'
+    | '/dashboard/browse'
     | '/dashboard/communities'
     | '/dashboard/raffles'
     | '/dashboard/'
@@ -569,6 +589,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/'
     | '/dashboard/analytics'
+    | '/dashboard/browse'
     | '/dashboard/communities'
     | '/dashboard/raffles'
     | '/dashboard/settings'
@@ -591,6 +612,7 @@ export interface FileRouteTypes {
     | '/dashboard/_dashboard'
     | '/_layout/'
     | '/dashboard/_dashboard/analytics'
+    | '/dashboard/_dashboard/browse'
     | '/dashboard/_dashboard/communities'
     | '/dashboard/_dashboard/raffles'
     | '/dashboard/_dashboard/'
@@ -681,6 +703,7 @@ export const routeTree = rootRoute
       "parent": "/dashboard",
       "children": [
         "/dashboard/_dashboard/analytics",
+        "/dashboard/_dashboard/browse",
         "/dashboard/_dashboard/communities",
         "/dashboard/_dashboard/raffles",
         "/dashboard/_dashboard/",
@@ -693,6 +716,10 @@ export const routeTree = rootRoute
     },
     "/dashboard/_dashboard/analytics": {
       "filePath": "dashboard/_dashboard/analytics.tsx",
+      "parent": "/dashboard/_dashboard"
+    },
+    "/dashboard/_dashboard/browse": {
+      "filePath": "dashboard/_dashboard/browse.tsx",
       "parent": "/dashboard/_dashboard"
     },
     "/dashboard/_dashboard/communities": {

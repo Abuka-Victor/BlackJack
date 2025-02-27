@@ -2,17 +2,26 @@ import { createFileRoute, Outlet, useMatchRoute } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
+import {
+  House,
+  Ticket,
+  Users,
+  ChartLineUp,
+  Gear,
+  MagnifyingGlass,
+} from '@phosphor-icons/react';
 
 export const Route = createFileRoute('/dashboard/_dashboard')({
   component: RouteComponent,
 });
 
 const sidebarItems = [
-  { name: 'Overview', path: '/dashboard', icon: '📊' },
-  { name: 'Raffles', path: '/dashboard/raffles', icon: '🎲' },
-  { name: 'Communities', path: '/dashboard/communities', icon: '👥' },
-  { name: 'Analytics', path: '/dashboard/analytics', icon: '📈' },
-  { name: 'Settings', path: '/dashboard/settings', icon: '⚙️' },
+  { name: 'Overview', path: '/dashboard', icon: <House size={20} weight="duotone" /> },
+  { name: 'Raffles', path: '/dashboard/raffles', icon: <Ticket size={20} weight="duotone" /> },
+  { name: 'Browse', path: '/dashboard/browse', icon: <MagnifyingGlass size={20} weight="duotone" /> },
+  { name: 'Communities', path: '/dashboard/communities', icon: <Users size={20} weight="duotone" /> },
+  { name: 'Analytics', path: '/dashboard/analytics', icon: <ChartLineUp size={20} weight="duotone" /> },
+  { name: 'Settings', path: '/dashboard/settings', icon: <Gear size={20} weight="duotone" /> },
 ];
 
 function RouteComponent() {
@@ -20,7 +29,7 @@ function RouteComponent() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-black flex flex-col md:flex-row">
+    <div className="h-screen bg-black flex flex-col md:flex-row overflow-hidden">
       {/* Mobile Menu Button */}
       <div className="md:hidden p-4 border-b border-purple-800/30">
         <div className="flex items-center justify-between">
@@ -42,7 +51,7 @@ function RouteComponent() {
         animate={{ x: 0 }}
         className={`${
           isMobileMenuOpen ? 'block' : 'hidden'
-        } md:block w-full md:w-64 border-r border-purple-800/30 p-6 bg-black md:relative fixed inset-0 z-50`}
+        } md:block w-full md:w-64 border-r border-purple-800/30 p-6 bg-black md:relative fixed inset-0 z-50 flex-shrink-0`}
       >
         <Link to="/" className="hidden md:block text-2xl font-bold text-white mb-8">
           BLACKJACK
@@ -72,8 +81,10 @@ function RouteComponent() {
         </ul>
       </motion.nav>
 
-      <main className="flex-1 p-4 md:p-8">
-        <Outlet />
+      <main className="flex-1 overflow-auto">
+        <div className="p-4 md:p-8">
+          <Outlet />
+        </div>
       </main>
     </div>
   );
