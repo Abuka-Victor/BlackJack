@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Hammer, ArrowLeft } from '@phosphor-icons/react';
 import { Link } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/blog')({
+export const Route = createFileRoute('/_layout/blog')({
   component: Blog,
 });
 

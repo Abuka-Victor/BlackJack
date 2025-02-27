@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ChartLineUp, ArrowLeft } from '@phosphor-icons/react';
 import { Link } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/analytics')({
+export const Route = createFileRoute('/_layout/analytics')({
   component: Analytics,
 });
 

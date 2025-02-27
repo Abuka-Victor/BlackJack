@@ -8,46 +8,41 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as PricingImport } from './routes/pricing'
-import { Route as FeaturesImport } from './routes/features'
-import { Route as DocsImport } from './routes/docs'
-import { Route as DemoImport } from './routes/demo'
-import { Route as DashboardImport } from './routes/dashboard'
-import { Route as BlogImport } from './routes/blog'
-import { Route as AnalyticsImport } from './routes/analytics'
-import { Route as AboutImport } from './routes/about'
-import { Route as IndexImport } from './routes/index'
-import { Route as DashboardRafflesImport } from './routes/dashboard.raffles'
-import { Route as DashboardCommunitiesImport } from './routes/dashboard.communities'
+import { Route as LayoutImport } from './routes/_layout'
+import { Route as LayoutIndexImport } from './routes/_layout.index'
+import { Route as DashboardDashboardImport } from './routes/dashboard/_dashboard'
+import { Route as LayoutPricingImport } from './routes/_layout.pricing'
+import { Route as LayoutFeaturesImport } from './routes/_layout.features'
+import { Route as LayoutDocsImport } from './routes/_layout.docs'
+import { Route as LayoutDemoImport } from './routes/_layout.demo'
+import { Route as LayoutBlogImport } from './routes/_layout.blog'
+import { Route as LayoutAnalyticsImport } from './routes/_layout.analytics'
+import { Route as LayoutAboutImport } from './routes/_layout.about'
+import { Route as DashboardDashboardIndexImport } from './routes/dashboard/_dashboard/index'
+import { Route as DashboardDashboardRafflesImport } from './routes/dashboard/_dashboard/raffles'
+import { Route as DashboardDashboardCommunitiesImport } from './routes/dashboard/_dashboard/communities'
+import { Route as DashboardDashboardAnalyticsImport } from './routes/dashboard/_dashboard/analytics'
+import { Route as DashboardDashboardSettingsSettingsImport } from './routes/dashboard/_dashboard/settings/_settings'
+import { Route as DashboardDashboardSettingsSettingsIndexImport } from './routes/dashboard/_dashboard/settings/_settings/index'
+import { Route as DashboardDashboardSettingsSettingsSecurityImport } from './routes/dashboard/_dashboard/settings/_settings/security'
+import { Route as DashboardDashboardSettingsSettingsNotificationsImport } from './routes/dashboard/_dashboard/settings/_settings/notifications'
+import { Route as DashboardDashboardSettingsSettingsLanguageImport } from './routes/dashboard/_dashboard/settings/_settings/language'
+import { Route as DashboardDashboardSettingsSettingsAppearanceImport } from './routes/dashboard/_dashboard/settings/_settings/appearance'
+import { Route as DashboardDashboardSettingsSettingsAdvancedImport } from './routes/dashboard/_dashboard/settings/_settings/advanced'
+
+// Create Virtual Routes
+
+const DashboardImport = createFileRoute('/dashboard')()
+const DashboardDashboardSettingsImport = createFileRoute(
+  '/dashboard/_dashboard/settings',
+)()
 
 // Create/Update Routes
-
-const PricingRoute = PricingImport.update({
-  id: '/pricing',
-  path: '/pricing',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const FeaturesRoute = FeaturesImport.update({
-  id: '/features',
-  path: '/features',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DocsRoute = DocsImport.update({
-  id: '/docs',
-  path: '/docs',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DemoRoute = DemoImport.update({
-  id: '/demo',
-  path: '/demo',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const DashboardRoute = DashboardImport.update({
   id: '/dashboard',
@@ -55,73 +50,205 @@ const DashboardRoute = DashboardImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const BlogRoute = BlogImport.update({
-  id: '/blog',
-  path: '/blog',
+const LayoutRoute = LayoutImport.update({
+  id: '/_layout',
   getParentRoute: () => rootRoute,
 } as any)
 
-const AnalyticsRoute = AnalyticsImport.update({
-  id: '/analytics',
-  path: '/analytics',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AboutRoute = AboutImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const IndexRoute = IndexImport.update({
+const LayoutIndexRoute = LayoutIndexImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => LayoutRoute,
 } as any)
 
-const DashboardRafflesRoute = DashboardRafflesImport.update({
+const DashboardDashboardRoute = DashboardDashboardImport.update({
+  id: '/_dashboard',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const LayoutPricingRoute = LayoutPricingImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutFeaturesRoute = LayoutFeaturesImport.update({
+  id: '/features',
+  path: '/features',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutDocsRoute = LayoutDocsImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutDemoRoute = LayoutDemoImport.update({
+  id: '/demo',
+  path: '/demo',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutBlogRoute = LayoutBlogImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutAnalyticsRoute = LayoutAnalyticsImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutAboutRoute = LayoutAboutImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const DashboardDashboardSettingsRoute = DashboardDashboardSettingsImport.update(
+  {
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => DashboardDashboardRoute,
+  } as any,
+)
+
+const DashboardDashboardIndexRoute = DashboardDashboardIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardDashboardRoute,
+} as any)
+
+const DashboardDashboardRafflesRoute = DashboardDashboardRafflesImport.update({
   id: '/raffles',
   path: '/raffles',
-  getParentRoute: () => DashboardRoute,
+  getParentRoute: () => DashboardDashboardRoute,
 } as any)
 
-const DashboardCommunitiesRoute = DashboardCommunitiesImport.update({
-  id: '/communities',
-  path: '/communities',
-  getParentRoute: () => DashboardRoute,
-} as any)
+const DashboardDashboardCommunitiesRoute =
+  DashboardDashboardCommunitiesImport.update({
+    id: '/communities',
+    path: '/communities',
+    getParentRoute: () => DashboardDashboardRoute,
+  } as any)
+
+const DashboardDashboardAnalyticsRoute =
+  DashboardDashboardAnalyticsImport.update({
+    id: '/analytics',
+    path: '/analytics',
+    getParentRoute: () => DashboardDashboardRoute,
+  } as any)
+
+const DashboardDashboardSettingsSettingsRoute =
+  DashboardDashboardSettingsSettingsImport.update({
+    id: '/_settings',
+    getParentRoute: () => DashboardDashboardSettingsRoute,
+  } as any)
+
+const DashboardDashboardSettingsSettingsIndexRoute =
+  DashboardDashboardSettingsSettingsIndexImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => DashboardDashboardSettingsSettingsRoute,
+  } as any)
+
+const DashboardDashboardSettingsSettingsSecurityRoute =
+  DashboardDashboardSettingsSettingsSecurityImport.update({
+    id: '/security',
+    path: '/security',
+    getParentRoute: () => DashboardDashboardSettingsSettingsRoute,
+  } as any)
+
+const DashboardDashboardSettingsSettingsNotificationsRoute =
+  DashboardDashboardSettingsSettingsNotificationsImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => DashboardDashboardSettingsSettingsRoute,
+  } as any)
+
+const DashboardDashboardSettingsSettingsLanguageRoute =
+  DashboardDashboardSettingsSettingsLanguageImport.update({
+    id: '/language',
+    path: '/language',
+    getParentRoute: () => DashboardDashboardSettingsSettingsRoute,
+  } as any)
+
+const DashboardDashboardSettingsSettingsAppearanceRoute =
+  DashboardDashboardSettingsSettingsAppearanceImport.update({
+    id: '/appearance',
+    path: '/appearance',
+    getParentRoute: () => DashboardDashboardSettingsSettingsRoute,
+  } as any)
+
+const DashboardDashboardSettingsSettingsAdvancedRoute =
+  DashboardDashboardSettingsSettingsAdvancedImport.update({
+    id: '/advanced',
+    path: '/advanced',
+    getParentRoute: () => DashboardDashboardSettingsSettingsRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
+    '/_layout': {
+      id: '/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
     }
-    '/about': {
-      id: '/about'
+    '/_layout/about': {
+      id: '/_layout/about'
       path: '/about'
       fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof LayoutAboutImport
+      parentRoute: typeof LayoutImport
     }
-    '/analytics': {
-      id: '/analytics'
+    '/_layout/analytics': {
+      id: '/_layout/analytics'
       path: '/analytics'
       fullPath: '/analytics'
-      preLoaderRoute: typeof AnalyticsImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof LayoutAnalyticsImport
+      parentRoute: typeof LayoutImport
     }
-    '/blog': {
-      id: '/blog'
+    '/_layout/blog': {
+      id: '/_layout/blog'
       path: '/blog'
       fullPath: '/blog'
-      preLoaderRoute: typeof BlogImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof LayoutBlogImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/demo': {
+      id: '/_layout/demo'
+      path: '/demo'
+      fullPath: '/demo'
+      preLoaderRoute: typeof LayoutDemoImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/docs': {
+      id: '/_layout/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof LayoutDocsImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/features': {
+      id: '/_layout/features'
+      path: '/features'
+      fullPath: '/features'
+      preLoaderRoute: typeof LayoutFeaturesImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/pricing': {
+      id: '/_layout/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof LayoutPricingImport
+      parentRoute: typeof LayoutImport
     }
     '/dashboard': {
       id: '/dashboard'
@@ -130,61 +257,204 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
-    '/demo': {
-      id: '/demo'
-      path: '/demo'
-      fullPath: '/demo'
-      preLoaderRoute: typeof DemoImport
-      parentRoute: typeof rootRoute
+    '/dashboard/_dashboard': {
+      id: '/dashboard/_dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardDashboardImport
+      parentRoute: typeof DashboardRoute
     }
-    '/docs': {
-      id: '/docs'
-      path: '/docs'
-      fullPath: '/docs'
-      preLoaderRoute: typeof DocsImport
-      parentRoute: typeof rootRoute
+    '/_layout/': {
+      id: '/_layout/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof LayoutIndexImport
+      parentRoute: typeof LayoutImport
     }
-    '/features': {
-      id: '/features'
-      path: '/features'
-      fullPath: '/features'
-      preLoaderRoute: typeof FeaturesImport
-      parentRoute: typeof rootRoute
+    '/dashboard/_dashboard/analytics': {
+      id: '/dashboard/_dashboard/analytics'
+      path: '/analytics'
+      fullPath: '/dashboard/analytics'
+      preLoaderRoute: typeof DashboardDashboardAnalyticsImport
+      parentRoute: typeof DashboardDashboardImport
     }
-    '/pricing': {
-      id: '/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof PricingImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/communities': {
-      id: '/dashboard/communities'
+    '/dashboard/_dashboard/communities': {
+      id: '/dashboard/_dashboard/communities'
       path: '/communities'
       fullPath: '/dashboard/communities'
-      preLoaderRoute: typeof DashboardCommunitiesImport
-      parentRoute: typeof DashboardImport
+      preLoaderRoute: typeof DashboardDashboardCommunitiesImport
+      parentRoute: typeof DashboardDashboardImport
     }
-    '/dashboard/raffles': {
-      id: '/dashboard/raffles'
+    '/dashboard/_dashboard/raffles': {
+      id: '/dashboard/_dashboard/raffles'
       path: '/raffles'
       fullPath: '/dashboard/raffles'
-      preLoaderRoute: typeof DashboardRafflesImport
-      parentRoute: typeof DashboardImport
+      preLoaderRoute: typeof DashboardDashboardRafflesImport
+      parentRoute: typeof DashboardDashboardImport
+    }
+    '/dashboard/_dashboard/': {
+      id: '/dashboard/_dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardDashboardIndexImport
+      parentRoute: typeof DashboardDashboardImport
+    }
+    '/dashboard/_dashboard/settings': {
+      id: '/dashboard/_dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardDashboardSettingsImport
+      parentRoute: typeof DashboardDashboardImport
+    }
+    '/dashboard/_dashboard/settings/_settings': {
+      id: '/dashboard/_dashboard/settings/_settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardDashboardSettingsSettingsImport
+      parentRoute: typeof DashboardDashboardSettingsRoute
+    }
+    '/dashboard/_dashboard/settings/_settings/advanced': {
+      id: '/dashboard/_dashboard/settings/_settings/advanced'
+      path: '/advanced'
+      fullPath: '/dashboard/settings/advanced'
+      preLoaderRoute: typeof DashboardDashboardSettingsSettingsAdvancedImport
+      parentRoute: typeof DashboardDashboardSettingsSettingsImport
+    }
+    '/dashboard/_dashboard/settings/_settings/appearance': {
+      id: '/dashboard/_dashboard/settings/_settings/appearance'
+      path: '/appearance'
+      fullPath: '/dashboard/settings/appearance'
+      preLoaderRoute: typeof DashboardDashboardSettingsSettingsAppearanceImport
+      parentRoute: typeof DashboardDashboardSettingsSettingsImport
+    }
+    '/dashboard/_dashboard/settings/_settings/language': {
+      id: '/dashboard/_dashboard/settings/_settings/language'
+      path: '/language'
+      fullPath: '/dashboard/settings/language'
+      preLoaderRoute: typeof DashboardDashboardSettingsSettingsLanguageImport
+      parentRoute: typeof DashboardDashboardSettingsSettingsImport
+    }
+    '/dashboard/_dashboard/settings/_settings/notifications': {
+      id: '/dashboard/_dashboard/settings/_settings/notifications'
+      path: '/notifications'
+      fullPath: '/dashboard/settings/notifications'
+      preLoaderRoute: typeof DashboardDashboardSettingsSettingsNotificationsImport
+      parentRoute: typeof DashboardDashboardSettingsSettingsImport
+    }
+    '/dashboard/_dashboard/settings/_settings/security': {
+      id: '/dashboard/_dashboard/settings/_settings/security'
+      path: '/security'
+      fullPath: '/dashboard/settings/security'
+      preLoaderRoute: typeof DashboardDashboardSettingsSettingsSecurityImport
+      parentRoute: typeof DashboardDashboardSettingsSettingsImport
+    }
+    '/dashboard/_dashboard/settings/_settings/': {
+      id: '/dashboard/_dashboard/settings/_settings/'
+      path: '/'
+      fullPath: '/dashboard/settings/'
+      preLoaderRoute: typeof DashboardDashboardSettingsSettingsIndexImport
+      parentRoute: typeof DashboardDashboardSettingsSettingsImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface LayoutRouteChildren {
+  LayoutAboutRoute: typeof LayoutAboutRoute
+  LayoutAnalyticsRoute: typeof LayoutAnalyticsRoute
+  LayoutBlogRoute: typeof LayoutBlogRoute
+  LayoutDemoRoute: typeof LayoutDemoRoute
+  LayoutDocsRoute: typeof LayoutDocsRoute
+  LayoutFeaturesRoute: typeof LayoutFeaturesRoute
+  LayoutPricingRoute: typeof LayoutPricingRoute
+  LayoutIndexRoute: typeof LayoutIndexRoute
+}
+
+const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutAboutRoute: LayoutAboutRoute,
+  LayoutAnalyticsRoute: LayoutAnalyticsRoute,
+  LayoutBlogRoute: LayoutBlogRoute,
+  LayoutDemoRoute: LayoutDemoRoute,
+  LayoutDocsRoute: LayoutDocsRoute,
+  LayoutFeaturesRoute: LayoutFeaturesRoute,
+  LayoutPricingRoute: LayoutPricingRoute,
+  LayoutIndexRoute: LayoutIndexRoute,
+}
+
+const LayoutRouteWithChildren =
+  LayoutRoute._addFileChildren(LayoutRouteChildren)
+
+interface DashboardDashboardSettingsSettingsRouteChildren {
+  DashboardDashboardSettingsSettingsAdvancedRoute: typeof DashboardDashboardSettingsSettingsAdvancedRoute
+  DashboardDashboardSettingsSettingsAppearanceRoute: typeof DashboardDashboardSettingsSettingsAppearanceRoute
+  DashboardDashboardSettingsSettingsLanguageRoute: typeof DashboardDashboardSettingsSettingsLanguageRoute
+  DashboardDashboardSettingsSettingsNotificationsRoute: typeof DashboardDashboardSettingsSettingsNotificationsRoute
+  DashboardDashboardSettingsSettingsSecurityRoute: typeof DashboardDashboardSettingsSettingsSecurityRoute
+  DashboardDashboardSettingsSettingsIndexRoute: typeof DashboardDashboardSettingsSettingsIndexRoute
+}
+
+const DashboardDashboardSettingsSettingsRouteChildren: DashboardDashboardSettingsSettingsRouteChildren =
+  {
+    DashboardDashboardSettingsSettingsAdvancedRoute:
+      DashboardDashboardSettingsSettingsAdvancedRoute,
+    DashboardDashboardSettingsSettingsAppearanceRoute:
+      DashboardDashboardSettingsSettingsAppearanceRoute,
+    DashboardDashboardSettingsSettingsLanguageRoute:
+      DashboardDashboardSettingsSettingsLanguageRoute,
+    DashboardDashboardSettingsSettingsNotificationsRoute:
+      DashboardDashboardSettingsSettingsNotificationsRoute,
+    DashboardDashboardSettingsSettingsSecurityRoute:
+      DashboardDashboardSettingsSettingsSecurityRoute,
+    DashboardDashboardSettingsSettingsIndexRoute:
+      DashboardDashboardSettingsSettingsIndexRoute,
+  }
+
+const DashboardDashboardSettingsSettingsRouteWithChildren =
+  DashboardDashboardSettingsSettingsRoute._addFileChildren(
+    DashboardDashboardSettingsSettingsRouteChildren,
+  )
+
+interface DashboardDashboardSettingsRouteChildren {
+  DashboardDashboardSettingsSettingsRoute: typeof DashboardDashboardSettingsSettingsRouteWithChildren
+}
+
+const DashboardDashboardSettingsRouteChildren: DashboardDashboardSettingsRouteChildren =
+  {
+    DashboardDashboardSettingsSettingsRoute:
+      DashboardDashboardSettingsSettingsRouteWithChildren,
+  }
+
+const DashboardDashboardSettingsRouteWithChildren =
+  DashboardDashboardSettingsRoute._addFileChildren(
+    DashboardDashboardSettingsRouteChildren,
+  )
+
+interface DashboardDashboardRouteChildren {
+  DashboardDashboardAnalyticsRoute: typeof DashboardDashboardAnalyticsRoute
+  DashboardDashboardCommunitiesRoute: typeof DashboardDashboardCommunitiesRoute
+  DashboardDashboardRafflesRoute: typeof DashboardDashboardRafflesRoute
+  DashboardDashboardIndexRoute: typeof DashboardDashboardIndexRoute
+  DashboardDashboardSettingsRoute: typeof DashboardDashboardSettingsRouteWithChildren
+}
+
+const DashboardDashboardRouteChildren: DashboardDashboardRouteChildren = {
+  DashboardDashboardAnalyticsRoute: DashboardDashboardAnalyticsRoute,
+  DashboardDashboardCommunitiesRoute: DashboardDashboardCommunitiesRoute,
+  DashboardDashboardRafflesRoute: DashboardDashboardRafflesRoute,
+  DashboardDashboardIndexRoute: DashboardDashboardIndexRoute,
+  DashboardDashboardSettingsRoute: DashboardDashboardSettingsRouteWithChildren,
+}
+
+const DashboardDashboardRouteWithChildren =
+  DashboardDashboardRoute._addFileChildren(DashboardDashboardRouteChildren)
+
 interface DashboardRouteChildren {
-  DashboardCommunitiesRoute: typeof DashboardCommunitiesRoute
-  DashboardRafflesRoute: typeof DashboardRafflesRoute
+  DashboardDashboardRoute: typeof DashboardDashboardRouteWithChildren
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
-  DashboardCommunitiesRoute: DashboardCommunitiesRoute,
-  DashboardRafflesRoute: DashboardRafflesRoute,
+  DashboardDashboardRoute: DashboardDashboardRouteWithChildren,
 }
 
 const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
@@ -192,113 +462,157 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 )
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/analytics': typeof AnalyticsRoute
-  '/blog': typeof BlogRoute
-  '/dashboard': typeof DashboardRouteWithChildren
-  '/demo': typeof DemoRoute
-  '/docs': typeof DocsRoute
-  '/features': typeof FeaturesRoute
-  '/pricing': typeof PricingRoute
-  '/dashboard/communities': typeof DashboardCommunitiesRoute
-  '/dashboard/raffles': typeof DashboardRafflesRoute
+  '': typeof LayoutRouteWithChildren
+  '/about': typeof LayoutAboutRoute
+  '/analytics': typeof LayoutAnalyticsRoute
+  '/blog': typeof LayoutBlogRoute
+  '/demo': typeof LayoutDemoRoute
+  '/docs': typeof LayoutDocsRoute
+  '/features': typeof LayoutFeaturesRoute
+  '/pricing': typeof LayoutPricingRoute
+  '/dashboard': typeof DashboardDashboardRouteWithChildren
+  '/': typeof LayoutIndexRoute
+  '/dashboard/analytics': typeof DashboardDashboardAnalyticsRoute
+  '/dashboard/communities': typeof DashboardDashboardCommunitiesRoute
+  '/dashboard/raffles': typeof DashboardDashboardRafflesRoute
+  '/dashboard/': typeof DashboardDashboardIndexRoute
+  '/dashboard/settings': typeof DashboardDashboardSettingsSettingsRouteWithChildren
+  '/dashboard/settings/advanced': typeof DashboardDashboardSettingsSettingsAdvancedRoute
+  '/dashboard/settings/appearance': typeof DashboardDashboardSettingsSettingsAppearanceRoute
+  '/dashboard/settings/language': typeof DashboardDashboardSettingsSettingsLanguageRoute
+  '/dashboard/settings/notifications': typeof DashboardDashboardSettingsSettingsNotificationsRoute
+  '/dashboard/settings/security': typeof DashboardDashboardSettingsSettingsSecurityRoute
+  '/dashboard/settings/': typeof DashboardDashboardSettingsSettingsIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/analytics': typeof AnalyticsRoute
-  '/blog': typeof BlogRoute
-  '/dashboard': typeof DashboardRouteWithChildren
-  '/demo': typeof DemoRoute
-  '/docs': typeof DocsRoute
-  '/features': typeof FeaturesRoute
-  '/pricing': typeof PricingRoute
-  '/dashboard/communities': typeof DashboardCommunitiesRoute
-  '/dashboard/raffles': typeof DashboardRafflesRoute
+  '/about': typeof LayoutAboutRoute
+  '/analytics': typeof LayoutAnalyticsRoute
+  '/blog': typeof LayoutBlogRoute
+  '/demo': typeof LayoutDemoRoute
+  '/docs': typeof LayoutDocsRoute
+  '/features': typeof LayoutFeaturesRoute
+  '/pricing': typeof LayoutPricingRoute
+  '/dashboard': typeof DashboardDashboardIndexRoute
+  '/': typeof LayoutIndexRoute
+  '/dashboard/analytics': typeof DashboardDashboardAnalyticsRoute
+  '/dashboard/communities': typeof DashboardDashboardCommunitiesRoute
+  '/dashboard/raffles': typeof DashboardDashboardRafflesRoute
+  '/dashboard/settings': typeof DashboardDashboardSettingsSettingsIndexRoute
+  '/dashboard/settings/advanced': typeof DashboardDashboardSettingsSettingsAdvancedRoute
+  '/dashboard/settings/appearance': typeof DashboardDashboardSettingsSettingsAppearanceRoute
+  '/dashboard/settings/language': typeof DashboardDashboardSettingsSettingsLanguageRoute
+  '/dashboard/settings/notifications': typeof DashboardDashboardSettingsSettingsNotificationsRoute
+  '/dashboard/settings/security': typeof DashboardDashboardSettingsSettingsSecurityRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/analytics': typeof AnalyticsRoute
-  '/blog': typeof BlogRoute
+  '/_layout': typeof LayoutRouteWithChildren
+  '/_layout/about': typeof LayoutAboutRoute
+  '/_layout/analytics': typeof LayoutAnalyticsRoute
+  '/_layout/blog': typeof LayoutBlogRoute
+  '/_layout/demo': typeof LayoutDemoRoute
+  '/_layout/docs': typeof LayoutDocsRoute
+  '/_layout/features': typeof LayoutFeaturesRoute
+  '/_layout/pricing': typeof LayoutPricingRoute
   '/dashboard': typeof DashboardRouteWithChildren
-  '/demo': typeof DemoRoute
-  '/docs': typeof DocsRoute
-  '/features': typeof FeaturesRoute
-  '/pricing': typeof PricingRoute
-  '/dashboard/communities': typeof DashboardCommunitiesRoute
-  '/dashboard/raffles': typeof DashboardRafflesRoute
+  '/dashboard/_dashboard': typeof DashboardDashboardRouteWithChildren
+  '/_layout/': typeof LayoutIndexRoute
+  '/dashboard/_dashboard/analytics': typeof DashboardDashboardAnalyticsRoute
+  '/dashboard/_dashboard/communities': typeof DashboardDashboardCommunitiesRoute
+  '/dashboard/_dashboard/raffles': typeof DashboardDashboardRafflesRoute
+  '/dashboard/_dashboard/': typeof DashboardDashboardIndexRoute
+  '/dashboard/_dashboard/settings': typeof DashboardDashboardSettingsRouteWithChildren
+  '/dashboard/_dashboard/settings/_settings': typeof DashboardDashboardSettingsSettingsRouteWithChildren
+  '/dashboard/_dashboard/settings/_settings/advanced': typeof DashboardDashboardSettingsSettingsAdvancedRoute
+  '/dashboard/_dashboard/settings/_settings/appearance': typeof DashboardDashboardSettingsSettingsAppearanceRoute
+  '/dashboard/_dashboard/settings/_settings/language': typeof DashboardDashboardSettingsSettingsLanguageRoute
+  '/dashboard/_dashboard/settings/_settings/notifications': typeof DashboardDashboardSettingsSettingsNotificationsRoute
+  '/dashboard/_dashboard/settings/_settings/security': typeof DashboardDashboardSettingsSettingsSecurityRoute
+  '/dashboard/_dashboard/settings/_settings/': typeof DashboardDashboardSettingsSettingsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
+    | ''
     | '/about'
     | '/analytics'
     | '/blog'
-    | '/dashboard'
     | '/demo'
     | '/docs'
     | '/features'
     | '/pricing'
+    | '/dashboard'
+    | '/'
+    | '/dashboard/analytics'
     | '/dashboard/communities'
     | '/dashboard/raffles'
+    | '/dashboard/'
+    | '/dashboard/settings'
+    | '/dashboard/settings/advanced'
+    | '/dashboard/settings/appearance'
+    | '/dashboard/settings/language'
+    | '/dashboard/settings/notifications'
+    | '/dashboard/settings/security'
+    | '/dashboard/settings/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/about'
     | '/analytics'
     | '/blog'
-    | '/dashboard'
     | '/demo'
     | '/docs'
     | '/features'
     | '/pricing'
+    | '/dashboard'
+    | '/'
+    | '/dashboard/analytics'
     | '/dashboard/communities'
     | '/dashboard/raffles'
+    | '/dashboard/settings'
+    | '/dashboard/settings/advanced'
+    | '/dashboard/settings/appearance'
+    | '/dashboard/settings/language'
+    | '/dashboard/settings/notifications'
+    | '/dashboard/settings/security'
   id:
     | '__root__'
-    | '/'
-    | '/about'
-    | '/analytics'
-    | '/blog'
+    | '/_layout'
+    | '/_layout/about'
+    | '/_layout/analytics'
+    | '/_layout/blog'
+    | '/_layout/demo'
+    | '/_layout/docs'
+    | '/_layout/features'
+    | '/_layout/pricing'
     | '/dashboard'
-    | '/demo'
-    | '/docs'
-    | '/features'
-    | '/pricing'
-    | '/dashboard/communities'
-    | '/dashboard/raffles'
+    | '/dashboard/_dashboard'
+    | '/_layout/'
+    | '/dashboard/_dashboard/analytics'
+    | '/dashboard/_dashboard/communities'
+    | '/dashboard/_dashboard/raffles'
+    | '/dashboard/_dashboard/'
+    | '/dashboard/_dashboard/settings'
+    | '/dashboard/_dashboard/settings/_settings'
+    | '/dashboard/_dashboard/settings/_settings/advanced'
+    | '/dashboard/_dashboard/settings/_settings/appearance'
+    | '/dashboard/_dashboard/settings/_settings/language'
+    | '/dashboard/_dashboard/settings/_settings/notifications'
+    | '/dashboard/_dashboard/settings/_settings/security'
+    | '/dashboard/_dashboard/settings/_settings/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  AnalyticsRoute: typeof AnalyticsRoute
-  BlogRoute: typeof BlogRoute
+  LayoutRoute: typeof LayoutRouteWithChildren
   DashboardRoute: typeof DashboardRouteWithChildren
-  DemoRoute: typeof DemoRoute
-  DocsRoute: typeof DocsRoute
-  FeaturesRoute: typeof FeaturesRoute
-  PricingRoute: typeof PricingRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
-  AnalyticsRoute: AnalyticsRoute,
-  BlogRoute: BlogRoute,
+  LayoutRoute: LayoutRouteWithChildren,
   DashboardRoute: DashboardRouteWithChildren,
-  DemoRoute: DemoRoute,
-  DocsRoute: DocsRoute,
-  FeaturesRoute: FeaturesRoute,
-  PricingRoute: PricingRoute,
 }
 
 export const routeTree = rootRoute
@@ -311,55 +625,130 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/about",
-        "/analytics",
-        "/blog",
-        "/dashboard",
-        "/demo",
-        "/docs",
-        "/features",
-        "/pricing"
+        "/_layout",
+        "/dashboard"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
+    "/_layout": {
+      "filePath": "_layout.tsx",
+      "children": [
+        "/_layout/about",
+        "/_layout/analytics",
+        "/_layout/blog",
+        "/_layout/demo",
+        "/_layout/docs",
+        "/_layout/features",
+        "/_layout/pricing",
+        "/_layout/"
+      ]
     },
-    "/about": {
-      "filePath": "about.tsx"
+    "/_layout/about": {
+      "filePath": "_layout.about.tsx",
+      "parent": "/_layout"
     },
-    "/analytics": {
-      "filePath": "analytics.tsx"
+    "/_layout/analytics": {
+      "filePath": "_layout.analytics.tsx",
+      "parent": "/_layout"
     },
-    "/blog": {
-      "filePath": "blog.tsx"
+    "/_layout/blog": {
+      "filePath": "_layout.blog.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/demo": {
+      "filePath": "_layout.demo.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/docs": {
+      "filePath": "_layout.docs.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/features": {
+      "filePath": "_layout.features.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/pricing": {
+      "filePath": "_layout.pricing.tsx",
+      "parent": "/_layout"
     },
     "/dashboard": {
-      "filePath": "dashboard.tsx",
+      "filePath": "dashboard",
       "children": [
-        "/dashboard/communities",
-        "/dashboard/raffles"
+        "/dashboard/_dashboard"
       ]
     },
-    "/demo": {
-      "filePath": "demo.tsx"
+    "/dashboard/_dashboard": {
+      "filePath": "dashboard/_dashboard.tsx",
+      "parent": "/dashboard",
+      "children": [
+        "/dashboard/_dashboard/analytics",
+        "/dashboard/_dashboard/communities",
+        "/dashboard/_dashboard/raffles",
+        "/dashboard/_dashboard/",
+        "/dashboard/_dashboard/settings"
+      ]
     },
-    "/docs": {
-      "filePath": "docs.tsx"
+    "/_layout/": {
+      "filePath": "_layout.index.tsx",
+      "parent": "/_layout"
     },
-    "/features": {
-      "filePath": "features.tsx"
+    "/dashboard/_dashboard/analytics": {
+      "filePath": "dashboard/_dashboard/analytics.tsx",
+      "parent": "/dashboard/_dashboard"
     },
-    "/pricing": {
-      "filePath": "pricing.tsx"
+    "/dashboard/_dashboard/communities": {
+      "filePath": "dashboard/_dashboard/communities.tsx",
+      "parent": "/dashboard/_dashboard"
     },
-    "/dashboard/communities": {
-      "filePath": "dashboard.communities.tsx",
-      "parent": "/dashboard"
+    "/dashboard/_dashboard/raffles": {
+      "filePath": "dashboard/_dashboard/raffles.tsx",
+      "parent": "/dashboard/_dashboard"
     },
-    "/dashboard/raffles": {
-      "filePath": "dashboard.raffles.tsx",
-      "parent": "/dashboard"
+    "/dashboard/_dashboard/": {
+      "filePath": "dashboard/_dashboard/index.tsx",
+      "parent": "/dashboard/_dashboard"
+    },
+    "/dashboard/_dashboard/settings": {
+      "filePath": "dashboard/_dashboard/settings",
+      "parent": "/dashboard/_dashboard",
+      "children": [
+        "/dashboard/_dashboard/settings/_settings"
+      ]
+    },
+    "/dashboard/_dashboard/settings/_settings": {
+      "filePath": "dashboard/_dashboard/settings/_settings.tsx",
+      "parent": "/dashboard/_dashboard/settings",
+      "children": [
+        "/dashboard/_dashboard/settings/_settings/advanced",
+        "/dashboard/_dashboard/settings/_settings/appearance",
+        "/dashboard/_dashboard/settings/_settings/language",
+        "/dashboard/_dashboard/settings/_settings/notifications",
+        "/dashboard/_dashboard/settings/_settings/security",
+        "/dashboard/_dashboard/settings/_settings/"
+      ]
+    },
+    "/dashboard/_dashboard/settings/_settings/advanced": {
+      "filePath": "dashboard/_dashboard/settings/_settings/advanced.tsx",
+      "parent": "/dashboard/_dashboard/settings/_settings"
+    },
+    "/dashboard/_dashboard/settings/_settings/appearance": {
+      "filePath": "dashboard/_dashboard/settings/_settings/appearance.tsx",
+      "parent": "/dashboard/_dashboard/settings/_settings"
+    },
+    "/dashboard/_dashboard/settings/_settings/language": {
+      "filePath": "dashboard/_dashboard/settings/_settings/language.tsx",
+      "parent": "/dashboard/_dashboard/settings/_settings"
+    },
+    "/dashboard/_dashboard/settings/_settings/notifications": {
+      "filePath": "dashboard/_dashboard/settings/_settings/notifications.tsx",
+      "parent": "/dashboard/_dashboard/settings/_settings"
+    },
+    "/dashboard/_dashboard/settings/_settings/security": {
+      "filePath": "dashboard/_dashboard/settings/_settings/security.tsx",
+      "parent": "/dashboard/_dashboard/settings/_settings"
+    },
+    "/dashboard/_dashboard/settings/_settings/": {
+      "filePath": "dashboard/_dashboard/settings/_settings/index.tsx",
+      "parent": "/dashboard/_dashboard/settings/_settings"
     }
   }
 }

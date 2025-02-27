@@ -11,7 +11,7 @@ import {
 
 import { DiscordButton } from '../components/ui/DiscordButton';
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute('/_layout/')({
   component: Index,
 });
 
@@ -133,7 +133,11 @@ function Index() {
               number: '36m+',
               label: 'Whitelisted',
               icon: (
-                <Trophy size={32} weight="duotone" className="text-purple-400" />
+                <Trophy
+                  size={32}
+                  weight="duotone"
+                  className="text-purple-400"
+                />
               ),
             },
             {

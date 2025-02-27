@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
 import { Users, User, Check } from '@phosphor-icons/react';
 
-export const Route = createFileRoute('/pricing')({
+export const Route = createFileRoute('/_layout/pricing')({
   component: Pricing,
 });
 

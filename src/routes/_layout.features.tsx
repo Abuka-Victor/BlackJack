@@ -10,7 +10,7 @@ import {
   Target,
 } from '@phosphor-icons/react';
 
-export const Route = createFileRoute('/features')({
+export const Route = createFileRoute('/_layout/features')({
   component: Features,
 });
 

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Book, ArrowLeft, Code, Terminal, PuzzlePiece } from '@phosphor-icons/react';
 import { Link } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/docs')({
+export const Route = createFileRoute('/_layout/docs')({
   component: Docs,
 });
 
