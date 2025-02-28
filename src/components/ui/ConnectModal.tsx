@@ -1,35 +1,43 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useConnectModal } from '../../context/ConnectModalContext';
-import { 
-  DiscordLogo, 
-  TwitterLogo, 
+import {
+  DiscordLogo,
+  TwitterLogo,
   Wallet,
   ArrowRight,
   Check,
-  X
+  X,
 } from '@phosphor-icons/react';
+import { useConnectUserWithDiscord } from '../../state/users';
 
 export function ConnectModal() {
   const { isOpen, closeModal } = useConnectModal();
+  const { mutate: connectDiscord, isPending: discordPending } =
+    useConnectUserWithDiscord();
 
   const platforms = [
     {
       name: 'Discord',
       icon: <DiscordLogo size={24} weight="fill" className="text-[#5865F2]" />,
       connected: false,
-      href: 'https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=identify%20guilds',
+      onClick: () => {
+        connectDiscord();
+      },
+      pending: discordPending,
     },
     {
       name: 'Twitter',
       icon: <TwitterLogo size={24} weight="fill" className="text-[#1DA1F2]" />,
       connected: false,
-      href: '#',
+      onClick: () => {},
+      pending: false,
     },
     {
       name: 'Ethereum Wallet',
       icon: <Wallet size={24} weight="fill" className="text-[#627EEA]" />,
       connected: false,
-      href: '#',
+      onClick: () => {},
+      pending: false,
     },
   ];
 
@@ -44,7 +52,7 @@ export function ConnectModal() {
             onClick={closeModal}
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
           />
-          
+
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -52,7 +60,9 @@ export function ConnectModal() {
             className="relative w-full max-w-md p-6 bg-black border border-purple-800/30 rounded-xl shadow-2xl"
           >
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-white">Connect Platform</h2>
+              <h2 className="text-2xl font-bold text-white">
+                Connect Platform
+              </h2>
               <button
                 onClick={closeModal}
                 className="p-2 text-gray-400 hover:text-white transition-colors"
@@ -63,9 +73,9 @@ export function ConnectModal() {
 
             <div className="space-y-4">
               {platforms.map((platform) => (
-                <motion.a
+                <motion.button
                   key={platform.name}
-                  href={platform.href}
+                  onClick={platform.onClick}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full p-4 flex items-center justify-between rounded-lg bg-purple-900/20 border border-purple-800/30 hover:border-purple-600/50 transition-all cursor-pointer"
@@ -79,6 +89,11 @@ export function ConnectModal() {
                       <p className="text-sm text-gray-400">
                         {platform.connected ? 'Connected' : 'Not connected'}
                       </p>
+                      {platform.pending ? (
+                        <p className="text-sm text-gray-400">Connecting...</p>
+                      ) : (
+                        ''
+                      )}
                     </div>
                   </div>
                   <div className="text-purple-400">
@@ -88,13 +103,14 @@ export function ConnectModal() {
                       <ArrowRight size={24} weight="bold" />
                     )}
                   </div>
-                </motion.a>
+                </motion.button>
               ))}
             </div>
 
             <div className="mt-6 pt-6 border-t border-purple-800/30">
               <p className="text-sm text-gray-400 text-center">
-                By connecting, you agree to our Terms of Service and Privacy Policy
+                By connecting, you agree to our Terms of Service and Privacy
+                Policy
               </p>
             </div>
           </motion.div>

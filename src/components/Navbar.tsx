@@ -1,8 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useConnectModal } from '../context/ConnectModalContext';
-import { ConnectModal } from './ui/ConnectModal';
 import {
   List,
   X,
@@ -12,11 +10,17 @@ import {
   Book,
   SignIn,
   ChartLineUp,
+  CompassRose,
 } from '@phosphor-icons/react';
+
+import { useConnectModal } from '../context/ConnectModalContext';
+import { ConnectModal } from './ui/ConnectModal';
+import { useAuthContext } from '../context/AuthContext';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { openModal } = useConnectModal();
+  const { user } = useAuthContext();
 
   return (
     <nav className="p-6 relative">
@@ -86,8 +90,18 @@ export default function Navbar() {
             className="bg-purple-600 px-4 py-2 rounded-lg text-white hover:bg-purple-700 transition-colors flex items-center space-x-2"
           >
             <SignIn size={20} />
-            <span>Sign In</span>
+            <span>Connect</span>
           </motion.button>
+
+          {user && (
+            <Link
+              to="/dashboard"
+              className="border border-purple-500 px-4 py-3 rounded-lg text-white hover:bg-purple-700 w-full flex items-center justify-center space-x-2"
+            >
+              <CompassRose size={20} />
+              <span>Dashboard</span>
+            </Link>
+          )}
         </div>
       </div>
 
@@ -101,8 +115,8 @@ export default function Navbar() {
             className="absolute top-20 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm border-t border-purple-800/30 md:hidden p-6"
           >
             <div className="flex flex-col space-y-6">
-              <Link 
-                to="/analytics" 
+              <Link
+                to="/analytics"
                 className="text-gray-300 hover:text-white flex items-center space-x-2"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -151,8 +165,17 @@ export default function Navbar() {
                 className="bg-purple-600 px-4 py-3 rounded-lg text-white hover:bg-purple-700 w-full flex items-center justify-center space-x-2"
               >
                 <SignIn size={20} />
-                <span>Sign In</span>
+                <span>Connect</span>
               </motion.button>
+              {user && (
+                <Link
+                  to="/dashboard"
+                  className="border border-purple-500 px-4 py-3 rounded-lg text-white hover:bg-purple-700 w-full flex items-center justify-center space-x-2"
+                >
+                  <CompassRose size={20} />
+                  <span>Dashboard</span>
+                </Link>
+              )}
             </div>
           </motion.div>
         )}
