@@ -6,7 +6,7 @@ import { toast } from "sonner";
 const client: Client = new Client();
 
 client
-  .setEndpoint('https://cloud.appwrite.io/v1')
+  .setEndpoint('https://api.megameboy.xyz/v1')
   .setProject('67c07cd70009721ee1c7');
 
 export const account: Account = new Account(client);
