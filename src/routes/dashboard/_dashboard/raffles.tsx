@@ -14,18 +14,21 @@ function RafflesPage() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-white">Raffle Management</h1>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-8">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">Raffle Management</h1>
+          <p className="text-gray-400 text-sm mt-1">Create and manage your raffle campaigns</p>
+        </div>
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           onClick={() => setIsCreateModalOpen(true)}
-          className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center space-x-2"
+          className="w-full sm:w-auto px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center justify-center space-x-2"
         >
           <Ticket size={20} />
-          <span>Create New Raffle</span>
+          <span>Create Raffle</span>
         </motion.button>
       </div>
 

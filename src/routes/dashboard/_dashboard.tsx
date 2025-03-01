@@ -20,6 +20,7 @@ import {
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getUserData, useLogoutUser } from '../../state/users';
+import { toast } from 'sonner';
 
 export const Route = createFileRoute('/dashboard/_dashboard')({
   component: RouteComponent,
@@ -58,14 +59,14 @@ const sidebarItems = [
     icon: <ChartLineUp size={20} weight="duotone" />,
   },
   {
-    name: 'Logout',
-    path: '/',
-    icon: <SignOut size={20} weight="duotone" />,
-  },
-  {
     name: 'Settings',
     path: '/dashboard/settings',
     icon: <Gear size={20} weight="duotone" />,
+  },
+  {
+    name: 'Logout',
+    path: '/',
+    icon: <SignOut size={20} weight="duotone" />,
   },
 ];
 
@@ -77,7 +78,10 @@ function RouteComponent() {
   const userQuery = useSuspenseQuery(getUserData);
   const user = userQuery.data;
 
-  if (user === null || user === undefined) navigate({ to: '/' });
+  if (user === null || user === undefined) {
+    toast.error('User not authenticated');
+    navigate({ to: '/' });
+  }
 
   return (
     <div className="h-screen bg-black flex flex-col md:flex-row overflow-hidden">
