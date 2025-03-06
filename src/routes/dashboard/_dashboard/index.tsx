@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
+import { XLogo, DiscordLogo, Wallet } from '@phosphor-icons/react';
 
 export const Route = createFileRoute('/dashboard/_dashboard/')({
   component: Dashboard,
@@ -94,12 +95,20 @@ function Dashboard() {
           </h2>
           <div className="space-y-4">
             {[
-              { platform: 'Discord', status: 'Connected', icon: '🎮' },
-              { platform: 'Twitter', status: 'Not Connected', icon: '🐦' },
+              {
+                platform: 'Discord',
+                status: 'Connected',
+                icon: <DiscordLogo size={24} className="text-purple-600" />,
+              },
+              {
+                platform: 'X(Twitter)',
+                status: 'Not Connected',
+                icon: <XLogo size={24} className="text-purple-600" />,
+              },
               {
                 platform: 'Ethereum Wallet',
                 status: 'Not Connected',
-                icon: '💎',
+                icon: <Wallet size={24} className="text-purple-600" />,
               },
             ].map((platform, index) => (
               <div
