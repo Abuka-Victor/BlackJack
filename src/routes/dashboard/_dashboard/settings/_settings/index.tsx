@@ -9,16 +9,22 @@ import {
   DiscordLogo,
 } from '@phosphor-icons/react';
 import { useState } from 'react';
+import { useSuspenseQuery } from '@tanstack/react-query';
+
+import { getUserData } from '../../../../../state/users';
 
 export const Route = createFileRoute(
   '/dashboard/_dashboard/settings/_settings/'
 )({
+  loader: ({ context: { queryClient } }) =>
+    queryClient.ensureQueryData(getUserData),
   component: Settings,
 });
 
 function Settings() {
   const [notifications, setNotifications] = useState(true);
   const [darkMode, setDarkMode] = useState(true);
+  const { data } = useSuspenseQuery(getUserData);
 
   return (
     <motion.div
@@ -34,7 +40,15 @@ function Settings() {
         <div className="space-y-6">
           <div className="flex items-center space-x-4">
             <div className="w-20 h-20 rounded-full bg-purple-900/30 flex items-center justify-center">
-              <UserCircle size={48} className="text-purple-400" />
+              {data?.imageUrl !== '' ? (
+                <img
+                  src={data?.imageUrl}
+                  alt="Profile picture"
+                  className="w-20 h-20 rounded-full"
+                />
+              ) : (
+                <UserCircle size={48} className="text-purple-400" />
+              )}
             </div>
             <button className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
               Change Avatar
@@ -44,11 +58,15 @@ function Settings() {
             <input
               type="text"
               placeholder="Display Name"
+              value={data?.discordData.username}
+              disabled={true}
               className="bg-purple-900/10 border border-purple-800/30 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-purple-500"
             />
             <input
               type="email"
               placeholder="Email"
+              value={data?.email}
+              disabled={true}
               className="bg-purple-900/10 border border-purple-800/30 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-purple-500"
             />
           </div>
@@ -65,7 +83,7 @@ function Settings() {
             {
               icon: <DiscordLogo size={24} />,
               name: 'Discord',
-              connected: true,
+              connected: data?.discordVerified,
             },
             {
               icon: <TwitterLogo size={24} />,

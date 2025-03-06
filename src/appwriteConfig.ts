@@ -3,6 +3,8 @@ import { toast } from "sonner";
 
 import { User } from "./types/User";
 import { RaffleFormData, Raffle } from "./types/Raffle";
+import discordClient, { getDiscordUserDetails } from "./api/discordApi";
+import { isWithinThreeHours } from "./utils/isWithin3Hours";
 
 
 const client: Client = new Client();
@@ -54,18 +56,44 @@ export async function getUserDetails() {
   if (existingUser) {
     return existingUser as User;
   } else {
+    const response = await getDiscordUserDetails();
     const newUser = await database.createDocument("67c0b589003a754a2fb3",
       "67c0b5ac00063dfbbf7f", authUser.$id, {
       id: authUser.$id,
       name: authUser.name,
       email: authUser.email,
-      imageUrl: null,
+      imageUrl: `https://cdn.discordapp.com/avatars/${response.data.id}/${response.data.avatar}.png`,
       createdAt: authUser.$createdAt,
       updatedAt: authUser.$updatedAt,
+      discordVerified: response.data.verified,
+      discordData: {
+        id: response.data.id,
+        username: response.data.username,
+        avatar: response.data.avatar,
+        servers: []
+      }
     })
     toast.success("Successfully connected")
     return newUser as User;
   }
+}
+
+export async function getUserSessionDetails() {
+  let session;
+  try {
+    session = await account.getSession("current");
+    if (isWithinThreeHours(session.providerAccessTokenExpiry)) {
+      await account.updateSession(session.$id)
+      session = await account.getSession("current");
+    }
+  } catch (error) {
+    console.log("This is the error from getUserSessionDetails", error);
+    return null;
+  }
+  if (!session) {
+    return null;
+  }
+  return session;
 }
 
 export async function createRaffle(raffleData: RaffleFormData) {
@@ -78,6 +106,16 @@ export async function createRaffle(raffleData: RaffleFormData) {
     throw new Error(error as string)
   }
 }
+
+// Add a request interceptor
+discordClient.interceptors.request.use(async function (config) {
+  const session = await account.getSession("current")
+  config.headers.Authorization = `Bearer ${session?.providerAccessToken}`;
+  return config;
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});
 
 // You then use the imported type definitions like this
 // const authUser: Models.Session = await account.createEmailPasswordSession(email, password);

@@ -17,19 +17,23 @@ import {
   MagnifyingGlass,
   SignOut,
 } from '@phosphor-icons/react';
-import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getUserData, useLogoutUser } from '../../state/users';
-import { toast } from 'sonner';
 
 export const Route = createFileRoute('/dashboard/_dashboard')({
+  beforeLoad: async ({ location, context }) => {
+    if (!context.auth.isAuthenticated) {
+      throw redirect({
+        to: '/',
+        search: {
+          redirect: location.href,
+        },
+      });
+    }
+  },
   component: RouteComponent,
   loader: ({ context: { queryClient } }) =>
     queryClient.ensureQueryData(getUserData),
-  onError: (error) => {
-    console.error('Error fetching user data:', error);
-    redirect({ to: '/' });
-  },
 });
 
 const sidebarItems = [
@@ -75,13 +79,11 @@ function RouteComponent() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { mutate: Logout } = useLogoutUser();
   const navigate = useNavigate();
-  const userQuery = useSuspenseQuery(getUserData);
-  const user = userQuery.data;
 
-  if (user === null || user === undefined) {
-    toast.error('User not authenticated');
+  const onClickLogout = () => {
+    Logout();
     navigate({ to: '/' });
-  }
+  };
 
   return (
     <div className="h-screen bg-black flex flex-col md:flex-row overflow-hidden">
@@ -126,7 +128,7 @@ function RouteComponent() {
                 <li key={item.name}>
                   <button
                     onClick={() => {
-                      Logout();
+                      onClickLogout();
                       setIsMobileMenuOpen(false);
                     }}
                     className={`flex items-center space-x-3 px-4 py-2 rounded-lg transition-colors cursor-pointer ${
