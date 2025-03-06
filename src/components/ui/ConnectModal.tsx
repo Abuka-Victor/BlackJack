@@ -2,11 +2,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useConnectModal } from '../../context/ConnectModalContext';
 import {
   DiscordLogo,
-  TwitterLogo,
   Wallet,
   ArrowRight,
   Check,
   X,
+  XLogo,
 } from '@phosphor-icons/react';
 import { useConnectUserWithDiscord } from '../../state/users';
 
@@ -26,8 +26,8 @@ export function ConnectModal() {
       pending: discordPending,
     },
     {
-      name: 'Twitter',
-      icon: <TwitterLogo size={24} weight="fill" className="text-[#1DA1F2]" />,
+      name: 'X(Twitter)',
+      icon: <XLogo size={24} weight="fill" className="text-[#1DA1F2]" />,
       connected: false,
       onClick: () => {},
       pending: false,

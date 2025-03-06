@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import {
   Bell,
   UserCircle,
-  TwitterLogo,
+  XLogo,
   Moon,
   Sun,
   DiscordLogo,
@@ -86,8 +86,8 @@ function Settings() {
               connected: data?.discordVerified,
             },
             {
-              icon: <TwitterLogo size={24} />,
-              name: 'Twitter',
+              icon: <XLogo size={24} />,
+              name: 'X (f.k.a Twitter)',
               connected: false,
             },
           ].map((account, index) => (
